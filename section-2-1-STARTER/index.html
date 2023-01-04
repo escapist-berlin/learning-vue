@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VueJS Course</title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+  </head>
+  <body>
+    <!-- v-cloak directive awaits the vue application to mount itself to the document -->
+    <div id="app" v-cloak>
+      <p>{{ fullName }}</p>
+      <!-- v-bind = : -->
+      <p><a :href="url" target="_blank">Google</a></p>
+      <!-- v-html directive allows to render raw html - but this is a security risk!  -->
+      <p v-html="raw_url"></p>
+      <p>{{ typeof age }}</p>
+
+      <hr />
+
+      <label>First Name</label>
+      <input type="text" v-model.lazy.trim="firstName" />
+
+      <!-- Keyboard events and modifiers, e.g. if user presses 'enter' -->
+      <label>Middle Name</label>
+      <input type="text" @keyup.enter="updateMiddleName" />
+
+      <!-- updating the value by binding and listening to events -->
+      <label>Last Name</label>
+      <input type="text" :value="lastName" @input.prevent="updateLastName('Last name event triggered!', $event)" />
+
+      <label>Age</label>
+      <input type="number" v-model.number="age" />
+      <!-- v-on:click = @click -->
+      <button type="button" @click="increment">Increment</button>
+      <button type="button" @click="age--">Decrement</button>
+    </div>
+
+    <!-- <div id="app2">
+      {{ firstName }}
+      {{ lastName }}
+    </div> -->
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
