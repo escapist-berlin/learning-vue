@@ -23,13 +23,21 @@ const vm = Vue.createApp({
     }
   },
   // computed properties are used to calculate a value / you can't pass a data here
-  // in this case better to use methods
+  // in this case better to use methods // no asynchronous tasks
   computed: {
     fullName() {
       console.log('Full name computed property was called')
 
       return `${this.firstName} ${this.middleName} ${this.lastName.toUpperCase()}`
     },
+  },
+  // Watchers can be used for asynchronous tasks
+  watch: {
+    age(newVal, oldVal) {
+      setTimeout(() => {
+        this.age = 20
+      }, 3000);
+    }
   }
 }).mount('#app')
 
