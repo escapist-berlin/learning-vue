@@ -1,10 +1,14 @@
 let vm = Vue.createApp({
+  // template: `{{ message }}`
+})
+
+vm.component('hello', {
+  template: `<h1>{{ message }}</h1>`,
   data() {
     return {
-      message: "Hello world!"
+      message: 'Hello World!'
     }
-  },
-  // template: `{{ message }}`
+  }
 })
 
 vm.mount('#app')
