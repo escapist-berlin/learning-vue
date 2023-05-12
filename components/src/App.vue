@@ -1,16 +1,24 @@
 <template>
-  <p>Hey!</p>
+  <h3>Hey!</h3>
   <greeting/>
+  <user :age="age"/>
 </template>
 
 <script>
 // register a component locally
 import Greeting from './components/Greeting.vue'
+import User from './components/User.vue'
 
 export default {
   name: 'App',
   components: {
-    Greeting
+    Greeting,
+    User
   },
+  data() {
+    return {
+      age: 20
+    }
+  }
 }
 </script>
