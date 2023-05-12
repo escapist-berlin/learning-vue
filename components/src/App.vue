@@ -1,6 +1,6 @@
 <template>
   <h3>Hey!</h3>
-  <greeting/>
+  <greeting :age="age"/>
   <user :age="age"/>
 </template>
 
