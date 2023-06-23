@@ -49,7 +49,11 @@ export default {
           : `The field ${ctx.field} is invalid.`;
 
         return message;
-      }
+      },
+      validateOnBlur: true, // These are default values
+      validateOnChange: true, // You can change them
+      validateOnInput: false, // If you want to make validation
+      validateOnModelUpdate: true, // less aggressive
     });
   },
 };
