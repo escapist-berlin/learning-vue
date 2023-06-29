@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@vee-validate/rules": "^4.9.6",
+    "firebase": "^9.23.0",
     "pinia": "^2.0.36",
     "vee-validate": "^4.9.6",
     "vue": "^3.3.2",
@@ -23,7 +24,7 @@
     "@rushstack/eslint-patch": "^1.2.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^7.1.0",
-    "@vue/test-utils": "^2.3.2",
+    "@vue/test-utils": "^2.2.7",
     "autoprefixer": "^10.4.14",
     "cypress": "^12.12.0",
     "eslint": "^8.39.0",
