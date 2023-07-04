@@ -99,6 +99,7 @@
 
 <script>
 import firebase from '@/includes/firebase';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
   name: "RegisterForm",
@@ -130,13 +131,22 @@ export default {
       this.reg_alert_variant = "bg-blue-500";
       this.reg_alert_msg = "Please wait! Your account is being created.";
 
-      const userCred = await firebase.auth().createUserWithEmailAndPassword(
-        values.email, values.password,
-      );
+      let userCred = null;
+      try {
+        const auth = getAuth(firebase);
+        userCred = await createUserWithEmailAndPassword(
+        auth, values.email, values.password,
+        );
+      } catch (error) {
+        this.reg_in_submission = false;
+        this.reg_alert_variant = 'bg-red-500';
+        this.reg_alert_msg = 'An unexpected error occured. Please try again later.';
+        return;
+      }
 
       this.reg_alert_variant = "bg-green-500";
       this.reg_alert_msg = "Success! Your account has been created.";
-      console.log(values);
+      console.log(userCred);
     },
   },
 }
