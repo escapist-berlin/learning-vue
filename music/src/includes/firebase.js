@@ -1,5 +1,6 @@
-import firebase from "firebase/compat/app";
-import "firebase/auth";
+import { initializeApp } from 'firebase/app'
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+// import { functionName } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyB3H50lfA12i2slUTuucP8YgNxLYNJGOUI",
@@ -8,5 +9,8 @@ const firebaseConfig = {
   storageBucket: "music-5eadf.appspot.com",
   appId: "1:685671300810:web:10101ba984124fc6f03e33"
 };
+// Initialize Firebase
+const firebaseApp = initializeApp(firebaseConfig)
 
-export default firebase.initializeApp(firebaseConfig);
+export const firebase = { getAuth, createUserWithEmailAndPassword }
+export default firebaseApp

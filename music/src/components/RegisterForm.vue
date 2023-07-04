@@ -98,8 +98,7 @@
 </template>
 
 <script>
-import firebase from '@/includes/firebase';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import firebase from '@/includes/firebase.js'
 
 export default {
   name: "RegisterForm",
@@ -132,10 +131,11 @@ export default {
       this.reg_alert_msg = "Please wait! Your account is being created.";
 
       let userCred = null;
+      const auth = firebase.getAuth()
+
       try {
-        const auth = getAuth(firebase);
-        userCred = await createUserWithEmailAndPassword(
-        auth, values.email, values.password,
+        userCred = await firebase.createUserWithEmailAndPassword(
+          auth, values.email, values.password,
         );
       } catch (error) {
         this.reg_in_submission = false;
@@ -145,7 +145,10 @@ export default {
       }
 
       this.reg_alert_variant = "bg-green-500";
-      this.reg_alert_msg = "Success! Your account has been created.";
+      this.reg_alert_msg =
+        `Success! Your account is set up.  Please check ` +
+        values.email +
+        ` to verify your email address.`;
       console.log(userCred);
     },
   },
