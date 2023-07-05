@@ -80,6 +80,18 @@
       </vee-field>
       <ErrorMessage class="text-red-600" name="country"/>
     </div>
+    <!-- UserType -->
+    <div class="mb-3">
+      <label class="inline-block mb-2">You are...</label>
+      <vee-field as="select" name="user_type"
+        class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+      >
+        <option value="listener">Listener</option>
+        <option value="artist">Artist</option>
+        <option value="label">Label</option>
+      </vee-field>
+      <ErrorMessage class="text-red-600" name="user_type"/>
+    </div>
     <!-- TOS -->
     <div class="mb-3 pl-6">
       <vee-field type="checkbox" name="tos" value="1"
@@ -115,10 +127,12 @@ export default {
         password: "required|min:9|max:100|excluded:password",
         confirm_password: "passwords_mismatch:@password",
         country: "required|country_excluded:Antarctica",
+        user_type: "required|user_type_excluded:label",
         tos: "tos",
       },
       userData: {
         country: 'USA',
+        user_type: 'listener',
       },
       reg_in_submission: false,
       reg_show_alert: false,
@@ -154,6 +168,7 @@ export default {
           email: values.email,
           age: values.age,
           country: values.country,
+          user_type: values.user_type,
         });
       } catch (error) {
         console.log(error.message);
