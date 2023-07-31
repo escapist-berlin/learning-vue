@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { auth, usersCollection } from "@/includes/firebase"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth"
 import { setDoc, doc } from "firebase/firestore"
 
 export default defineStore('user', {
@@ -39,6 +39,11 @@ export default defineStore('user', {
       );
 
       this.userLoggedIn = true;
+    },
+    async signOut() {
+      await signOut(auth);
+
+      this.userLoggedIn = false;
     }
   }
 });
