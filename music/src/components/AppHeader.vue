@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapStores, mapState, mapWritableState } from "pinia"
+import { mapStores, mapWritableState } from "pinia"
 import useModalStore from "@/stores/modal"
 import useUserStore from "@/stores/user"
 
