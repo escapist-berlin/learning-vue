@@ -16,12 +16,13 @@ const routes = [
   },
   {
     name: 'manage',
+    // alias: '/manage', // same as next object but without redirect
     path: '/manage-music',
     component: ManageView,
   },
   {
     path: '/manage',
-    redirect: { name: 'manage' },
+    redirect: { name: 'manage' }, // better for search engines
   },
   {
     path: '/:catchAll(.*)*',
