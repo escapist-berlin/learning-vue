@@ -1,19 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from "@/views/HomeView.vue"
-import AboutView from "@/views/AboutView.vue"
-import ManageView from "@/views/ManageView.vue"
+import HomeView from '@/views/HomeView.vue'
+import AboutView from '@/views/AboutView.vue'
+import ManageView from '@/views/ManageView.vue'
 
 const routes = [
   {
-    path: "/", // example.com/
+    name: 'home',
+    path: '/', // example.com/
     component: HomeView,
   },
   {
-    path: "/about", // example.com/about
+    name: 'about',
+    path: '/about', // example.com/about
     component: AboutView,
   },
   {
-    path: "/manage",
+    name: 'manage',
+    path: '/manage',
     component: ManageView,
   },
 ];
