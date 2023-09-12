@@ -68,21 +68,18 @@ export default {
 
         const uploadTask = uploadBytesResumable(storageRef, file);
 
-        this.uploads.push({
+        const uploadIndex = this.uploads.push({
           uploadTask,
           current_progress: 0,
           name: file.name,
-        });
+        }) - 1;
 
         uploadTask.on('state_changed',
           (snapshot) => {
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            this.uploads[uploadIndex].current_progress = progress;
           }
         );
-
-        // uploadBytesResumable(storageRef, file).then((snapshot) => {
-        //   console.log('Uploaded a blob or file!');
-        // });
       })
       console.log(files)
     },
