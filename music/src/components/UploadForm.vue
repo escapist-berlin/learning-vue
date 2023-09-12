@@ -23,33 +23,19 @@
       </div>
       <hr class="my-6" />
       <!-- Progess Bars -->
-      <div class="mb-4">
+      <div class="mb-4" v-for="upload in uploads" :key="upload.name">
         <!-- File Name -->
-        <div class="font-bold text-sm">Just another song.mp3</div>
+        <div class="font-bold text-sm">
+          {{ upload.name }}
+        </div>
         <div class="flex h-4 overflow-hidden bg-gray-200 rounded">
           <!-- Inner Progress Bar -->
           <div
             class="transition-all progress-bar bg-blue-400"
-            style="width: 75%"
-          ></div>
-        </div>
-      </div>
-      <div class="mb-4">
-        <div class="font-bold text-sm">Just another song.mp3</div>
-        <div class="flex h-4 overflow-hidden bg-gray-200 rounded">
-          <div
-            class="transition-all progress-bar bg-blue-400"
-            style="width: 35%"
-          ></div>
-        </div>
-      </div>
-      <div class="mb-4">
-        <div class="font-bold text-sm">Just another song.mp3</div>
-        <div class="flex h-4 overflow-hidden bg-gray-200 rounded">
-          <div
-            class="transition-all progress-bar bg-blue-400"
-            style="width: 55%"
-          ></div>
+            :class="'bg-blue-400'"
+            :style="{ width: upload.current_progress + '%' }"
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -58,13 +44,14 @@
 
 <script>
 import { storage } from "@/includes/firebase";
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytesResumable } from "firebase/storage";
 
 export default {
   name: "UploadForm",
   data() {
     return {
       is_dragover: false,
+      uploads: [],
     };
   },
   methods: {
@@ -78,9 +65,24 @@ export default {
         }
 
         const storageRef = ref(storage, `songs/${file.name}`);
-        uploadBytes(storageRef, file).then((snapshot) => {
-          console.log('Uploaded a blob or file!');
+
+        const uploadTask = uploadBytesResumable(storageRef, file);
+
+        this.uploads.push({
+          uploadTask,
+          current_progress: 0,
+          name: file.name,
         });
+
+        uploadTask.on('state_changed',
+          (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          }
+        );
+
+        // uploadBytesResumable(storageRef, file).then((snapshot) => {
+        //   console.log('Uploaded a blob or file!');
+        // });
       })
       console.log(files)
     },
