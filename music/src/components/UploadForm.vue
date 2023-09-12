@@ -57,6 +57,9 @@
 </template>
 
 <script>
+import { storage } from "@/includes/firebase";
+import { ref, uploadBytes } from "firebase/storage";
+
 export default {
   name: "UploadForm",
   data() {
@@ -73,8 +76,12 @@ export default {
         if(file.type !== 'audio/mpeg') {
           return;
         }
-      })
 
+        const storageRef = ref(storage, `songs/${file.name}`);
+        uploadBytes(storageRef, file).then((snapshot) => {
+          console.log('Uploaded a blob or file!');
+        });
+      })
       console.log(files)
     },
   },
