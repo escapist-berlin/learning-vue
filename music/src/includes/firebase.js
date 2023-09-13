@@ -17,8 +17,17 @@ const auth = getAuth()
 const db = getFirestore()
 const storage = getStorage();
 
-const usersCollection = collection(db, "users")
+const usersCollection = collection(db, "users");
+const songsCollection = collection(db, "songs");
+
+console.log("songsCollection", songsCollection)
 
 // export as named exports
-export { auth, db, usersCollection, storage, }
+export {
+  auth,
+  db,
+  usersCollection,
+  songsCollection,
+  storage,
+}
 export default firebaseApp
