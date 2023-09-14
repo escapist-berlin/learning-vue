@@ -114,6 +114,11 @@ export default {
       })
       console.log(files)
     },
+    cancelUploads() {
+      this.uploads.forEach((upload) => {
+        upload.uploadTask.cancel();
+      })
+    },
   },
   beforeUnmount() {
     this.uploads.forEach((upload) => {
