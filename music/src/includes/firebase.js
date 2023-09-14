@@ -20,8 +20,6 @@ const storage = getStorage();
 const usersCollection = collection(db, "users");
 const songsCollection = collection(db, "songs");
 
-console.log("songsCollection", songsCollection)
-
 // export as named exports
 export {
   auth,
