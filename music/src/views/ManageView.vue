@@ -134,23 +134,31 @@
 <script>
 // import useUserStore from "@/stores/user";
 import AppUpload from "@/components/UploadForm.vue";
-import { db, songsCollection, auth } from "@/includes/firebase";
-import { collection, query, where } from "firebase/firestore";
+import { songsCollection, auth } from "@/includes/firebase";
+import { query, where, getDocs } from "firebase/firestore";
 
 export default {
   name: 'manage-view',
   components: {
     AppUpload,
   },
-  created() {
-    // const songsRef = collection(db, 'songs');
+  data() {
+    return {
+      songs: [],
+    }
+  },
+  async created() {
+    const q = query(songsCollection, where('uid', '==', auth.currentUser.uid));
 
-    // const snapshot = await songsRef.where('uid', '==', auth.currentUser.uid)
-    //   .get();
+    const querySnapshot = await getDocs(q);
 
-    const snapshot = query(songsCollection, where('uid', '==', auth.currentUser.uid));
-
-    console.log("snapshot", snapshot)
+    querySnapshot.forEach((doc) => {
+      const song = {
+        ...doc.data(),
+        docID: doc.id,
+      }
+      this.songs.push(song);
+    });
   },
   // beforeRouteLeave(to, from, next) {
   //   this.$refs.upload.cancelUploads();
