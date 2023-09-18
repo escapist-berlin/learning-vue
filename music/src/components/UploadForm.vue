@@ -46,7 +46,7 @@
 <script>
 import { storage, auth, songsCollection } from "@/includes/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { addDoc } from "firebase/firestore";
+import { addDoc, getDoc } from "firebase/firestore";
 
 export default {
   name: "UploadForm",
@@ -56,6 +56,7 @@ export default {
       uploads: [],
     };
   },
+  props: ['addSong'],
   methods: {
     upload($event) {
       this.is_dragover = false;
@@ -105,7 +106,10 @@ export default {
 
             song.url = await getDownloadURL(uploadTask.snapshot.ref);
 
-            await addDoc(songsCollection, song);
+            const songRef = await addDoc(songsCollection, song);
+            const songSnapshot = await getDoc(songRef);
+
+            this.addSong(songSnapshot);
 
             this.uploads[uploadIndex].variant = 'bg-green-400';
             this.uploads[uploadIndex].icon = 'fas fa-check';
