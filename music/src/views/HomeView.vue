@@ -45,7 +45,7 @@
 
 <script>
 import { songsCollection } from "@/includes/firebase";
-import { getDocs } from "firebase/firestore";
+import { getDoc, getDocs, doc, query, startAfter, orderBy, limit } from "firebase/firestore";
 import AppSongItem from '@/components/SongItem.vue';
 
 export default {
@@ -56,6 +56,8 @@ export default {
   data() {
     return {
       songs: [],
+      maxPerPage: 25,
+      pendingRequest: false,
     };
   },
   async created() {
@@ -73,11 +75,28 @@ export default {
       const bottomOfWindow = Math.round(scrollTop) + innerHeight === offsetHeight;
 
       if(bottomOfWindow) {
-        console.log('Bottom of window');
+        this.getSongs();
       }
     },
     async getSongs() {
-      const snapshots = await getDocs(songsCollection);
+      if (this.pendingRequest) {
+        return;
+      }
+
+      this.pendingRequest = true;
+
+      let snapshots;
+
+      if (this.songs.length) {
+        const songRef = await doc(songsCollection, this.songs[this.songs.length - 1].docID);
+        const lastDoc = await getDoc(songRef);
+
+        const q = query(songsCollection, orderBy('modified_name'), startAfter(lastDoc), limit(this.maxPerPage));
+        snapshots = await getDocs(q);
+      } else {
+        const q = query(songsCollection, orderBy('modified_name'), limit(this.maxPerPage));
+        snapshots = await getDocs(q);
+      }
 
       snapshots.forEach((document) => {
         this.songs.push({
@@ -85,6 +104,8 @@ export default {
           ...document.data(),
         });
       });
+
+      this.pendingRequest = false;
     },
   },
 }
