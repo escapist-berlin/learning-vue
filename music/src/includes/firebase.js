@@ -19,6 +19,7 @@ const storage = getStorage();
 
 const usersCollection = collection(db, "users");
 const songsCollection = collection(db, "songs");
+const commentsCollection = collection(db, "comments");
 
 // export as named exports
 export {
@@ -26,6 +27,7 @@ export {
   db,
   usersCollection,
   songsCollection,
+  commentsCollection,
   storage,
 }
 export default firebaseApp

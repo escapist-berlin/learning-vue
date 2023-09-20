@@ -40,8 +40,8 @@
         </div>
         <vee-form
           :validation-schema="schema"
-          :initial-values="comment"
           @submit="addComment"
+          v-if="userLoggedIn"
           >
           <vee-field
             as="textarea"
@@ -147,8 +147,10 @@
 
 <script>
 import { ErrorMessage } from 'vee-validate';
-import { songsCollection } from "@/includes/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { songsCollection, commentsCollection, auth } from "@/includes/firebase";
+import { doc, getDoc, addDoc } from "firebase/firestore";
+import { mapState } from "pinia";
+import useUserStore from "@/stores/user";
 
 export default {
   name: 'SongView',
@@ -165,6 +167,10 @@ export default {
       comment_alert_message: 'Please wait! Your comment is being submitted!',
     }
   },
+  props: ['comment'],
+  computed: {
+    ...mapState(useUserStore, ["userLoggedIn"]),
+  },
   async created() {
     const docSnapshot = await getDoc(doc(songsCollection, this.$route.params.id))
 
@@ -174,12 +180,31 @@ export default {
     }
     this.song = docSnapshot.data();
   },
-  async addComment(values) {
-    console.log("values", values)
-    this.comment_in_submission = true;
-    this.comment_show_alert = true;
-    this.comment_alert_variant = 'bg-blue-500';
-    this.comment_alert_message = 'Please wait! Your comment is being submitted!-blue-500';
-  }
+  methods: {
+    async addComment(values, { resetForm }) {
+      this.comment_in_submission = true;
+      this.comment_show_alert = true;
+      this.comment_alert_variant = 'bg-blue-500';
+      this.comment_alert_message = 'Please wait! Your comment is being submitted!-blue-500';
+
+      const comment = {
+        content: values.comment,
+        datePosted: new Date().toString(),
+        sid: this.$route.params.id,
+        name: auth.currentUser.displayName,
+        uid: auth.currentUser.uid,
+      }
+
+      await addDoc(commentsCollection, comment);
+
+      this.comment_in_submission = false;
+      this.comment_alert_variant = 'bg-green-500';
+      this.comment_alert_message = 'Comment added!';
+
+      console.log("comment", comment)
+
+      resetForm();
+    },
+  },
 };
 </script>
