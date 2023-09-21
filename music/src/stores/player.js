@@ -52,6 +52,25 @@ export default defineStore("player", {
         requestAnimationFrame(this.progress);
       }
     },
+    updateSeek(event) {
+      if (!this.sound.playing) {
+        return;
+      }
+
+      const { x, width } = event.currentTarget.getBoundingClientRect();
+      // Document = 2000px, Timeline = 1000px
+      // clientX = 1000px if we click in the middle of the timline
+      // clientX is realtive to the document!
+      // Distance ( = x) (from left side of the document to the left of the timline)
+      // Distance = 500px
+      // clientX - Distance = 500px
+      const clickX = event.clientX - x;
+      const percentage = clickX / width;
+      const seconds = this.sound.duration() * percentage;
+
+      this.sound.seek(seconds);
+      this.sound.once("seek", this.progress);
+    },
   },
   getters: {
     playing: (state) => {
