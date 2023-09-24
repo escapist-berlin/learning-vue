@@ -64,7 +64,7 @@
               class="py-1.5 px-3 rounded text-white bg-green-600 block"
               :disabled="comment_in_submission"
               >
-              {{ $t("song.sumbit_btn") }}
+              {{ $t("song.submit_btn") }}
             </button>
           </vee-form>
           <!-- Sort Comments -->

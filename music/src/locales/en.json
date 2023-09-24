@@ -6,9 +6,10 @@
   "song": {
     "comment_count": "No comments | 1 comment | {count} comments",
     "comment_placeholder": "Your comment here...",
-    "sumbit_btn": "Submit",
+    "submit_btn": "Submit",
     "sort_latest": "Latest",
-    "sort_oldest": "Oldest"
+    "sort_oldest": "Oldest",
+    "go_back": "Go Back"
   },
   "header": {
     "about": "About",
