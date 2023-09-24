@@ -14,18 +14,20 @@
         type="email"
         name="email"
         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
-        placeholder="Enter Email"
+        :placeholder="$t('register.enter_email')"
       />
       <ErrorMessage class="text-red-600" name="email"/>
     </div>
     <!-- Password -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Password</label>
+      <label class="inline-block mb-2">{{ $t("register.password") }}</label>
       <vee-field name="password" :bails="false" v-slot="{ field, errors }">
         <input class="block w-full py-1.5 px-3 text-gray-800 border
           border-gray-300 transition duration-500 focus:outline-none
-          focus:border-black rounded" type="password"
-          placeholder="Password" v-bind="field"
+          focus:border-black rounded"
+          type="password"
+          :placeholder="$t('register.enter_password')"
+          v-bind="field"
         />
         <div class="text-red-600" v-for="error in errors" :key="error">
           {{ error }}
@@ -37,7 +39,7 @@
       class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
       :disabled="login_in_submission"
     >
-      Submit
+      {{ $t("song.sumbit_btn") }}
     </button>
   </vee-form>
 </template>

@@ -56,7 +56,7 @@
               as="textarea"
               name="comment"
               class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded mb-4"
-              placeholder="Your comment here..."
+              :placeholder="$t('song.comment_placeholder')"
             />
             <ErrorMessage class="text-red-600" name="comment"/>
             <button
@@ -64,7 +64,7 @@
               class="py-1.5 px-3 rounded text-white bg-green-600 block"
               :disabled="comment_in_submission"
               >
-              Submit
+              {{ $t("song.sumbit_btn") }}
             </button>
           </vee-form>
           <!-- Sort Comments -->
@@ -72,8 +72,8 @@
             class="block mt-4 py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
             v-model="sort"
           >
-            <option value="1">Latest</option>
-            <option value="2">Oldest</option>
+            <option value="1">{{ $t("song.sort_latest") }}</option>
+            <option value="2">{{ $t("song.sort_oldest") }}</option>
           </select>
         </div>
       </div>

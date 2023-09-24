@@ -20,11 +20,11 @@
               class="px-2 text-white"
               :to="{ name: 'about'}"
               >
-              About
+              {{ $t("header.about") }}
             </router-link>
           </li>
           <li v-if="!userStore.userLoggedIn">
-            <a class="px-2 text-white" href="#" @click.prevent="toggleAuthModal">Login / Register</a>
+            <a class="px-2 text-white" href="#" @click.prevent="toggleAuthModal">{{ $t("auth.login") }} / {{ $t("auth.register") }}</a>
           </li>
           <template v-else>
             <li>
@@ -32,7 +32,7 @@
               class="px-2 text-white"
               :to="{ name: 'manage'}"
               >
-              Manage
+              {{ $t("header.manage") }}
             </router-link>
             </li>
             <li>
@@ -41,7 +41,7 @@
                 href="#"
                 @click.prevent="signOut"
                 >
-                Logout
+                {{ $t("auth.logout") }}
               </a>
             </li>
           </template>
@@ -69,7 +69,7 @@ export default {
     ...mapStores(useModalStore, useUserStore),
     ...mapWritableState(useModalStore, ["isOpen"]),
     currentLocale() {
-      return this.$i18n.locale === "de" ? "German" : "English";
+      return this.$i18n.locale === "de" ? "Deutsch" : "English";
     },
   },
   methods: {

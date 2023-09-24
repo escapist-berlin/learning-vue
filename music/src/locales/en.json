@@ -1,12 +1,48 @@
 {
   "home": {
-    "listen": "Listen to Great Music!"
+    "listen": "Listen to Great Music!",
+    "explore": "Explore the world of music. Discover chart-toppers and hidden gems, and even upload your own tracks. Join us today and dive into the musical experience!"
   },
   "song": {
-    "comment_count": "No comments | 1 comment | {count} comments"
+    "comment_count": "No comments | 1 comment | {count} comments",
+    "comment_placeholder": "Your comment here...",
+    "sumbit_btn": "Submit",
+    "sort_latest": "Latest",
+    "sort_oldest": "Oldest"
+  },
+  "header": {
+    "about": "About",
+    "manage": "Manage"
+  },
+  "auth": {
+    "account": "Your Account",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register"
   },
   "register": {
+    "enter_name": "Enter Your Name",
+    "enter_email": "Enter Your Email",
+    "enter_age": "Enter Your Age",
+    "enter_password": "Enter Your Password",
+    "age": "Age",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "country": "Country",
+    "country_usa": "USA",
+    "country_mexico": "Mexico",
+    "country_germany": "Germany",
+    "country_antarctica": "Antarctica",
+    "user_type": "You are...",
+    "user_type_a": "Listener",
+    "user_type_b": "Artist",
     "accept": "I accept Music's {0}",
     "tos": "Terms of Service"
+  },
+  "manage": {
+    "my_songs": "My Songs"
+  },
+  "upload": {
+    "drop": "Drop your mp3-files here"
   }
 }

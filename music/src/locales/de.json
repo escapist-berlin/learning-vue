@@ -1,5 +1,48 @@
 {
   "home": {
-    "listen": "Erlebe großartige Musik!"
+    "listen": "Erlebe großartige Musik!",
+    "explore": "Erkunde die Welt der Musik. Entdecke Chart-Hits und versteckte Juwelen und lade sogar deine eigenen Tracks hoch. Schließe dich uns noch heute an und tauche ein in das musikalische Erlebnis!"
+  },
+  "song": {
+    "comment_count": "Keine Kommentare | 1 Kommentar | {count} Kommentare",
+    "comment_placeholder": "Dein Kommentar hier...",
+    "sumbit_btn": "Absenden",
+    "sort_latest": "Neueste",
+    "sort_oldest": "Älteste"
+  },
+  "header": {
+    "about": "Über",
+    "manage": "Uploads verwalten"
+  },
+  "auth": {
+    "account": "Dein Account",
+    "login": "Einloggen",
+    "logout": "Ausloggen",
+    "register": "Registrieren"
+  },
+  "register": {
+    "enter_name": "Gib deinen Namen ein",
+    "enter_email": "Gib deine Email ein",
+    "enter_age": "Gib dein Alter ein",
+    "enter_password": "Gib dein Passwort ein",
+    "age": "Alter",
+    "password": "Passwort",
+    "confirm_password": "Bestätige dein Passwort",
+    "country": "Land",
+    "country_usa": "Vereinigte Staaten",
+    "country_mexico": "Mexiko",
+    "country_germany": "Deutschland",
+    "country_antarctica": "Antarktis",
+    "user_type": "Du bist...",
+    "user_type_a": "Hörer*in",
+    "user_type_b": "Künstler*in",
+    "accept": "Ich akzeptiere {0} von Music",
+    "tos": "die Nutzungsbedingungen"
+  },
+  "manage": {
+    "my_songs": "Meine Songs"
+  },
+  "upload": {
+    "drop": "Hier kannst du deine mp3-Dateien ablegen"
   }
 }
