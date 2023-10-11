@@ -1,7 +1,7 @@
 import HomeView from '@/views/HomeView.vue';
 import SongItem from '@/components/SongItem.vue';
 import { shallowMount } from '@vue/test-utils';
-import { describe, test, expect, toHaveLength } from "vitest";
+import { describe, test, expect } from "vitest";
 
 describe('HomeView.vue', () => {
   test('renders list of songs', () => {
@@ -13,12 +13,21 @@ describe('HomeView.vue', () => {
       data() {
         return {
           songs,
+        };
+      },
+      global: {
+        mocks: {
+          $t: (message) => message,
         }
       }
     });
 
     const items = component.findAllComponents(SongItem);
 
-    expect(items).toHaveLength(songs.length)
+    expect(items).toHaveLength(songs.length);
+
+    items.forEach((wrapper, i) => {
+      expect(wrapper.props().song).toStrictEqual(songs[i]);
+    });
   });
 });
