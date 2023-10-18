@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import {
   ref,
   reactive,
@@ -33,48 +33,30 @@ import { usePhrase } from "@/hooks/phrase";
 // toRefs allows to make property reactive if we use spread operator
 // spread operator is not available at reactive so we need toRefs
 
-export default {
-  name: "App",
-  components: {
-    AppAlert,
-  },
-  setup() {
-    const btn = ref(null);
+const btn = ref(null);
 
-    onBeforeMount(() => {
-      console.log("onBeforeMount")
-    });
-    onMounted(() => {
-      console.log("onMounted")
+onBeforeMount(() => {
+  console.log("onBeforeMount")
+});
+onMounted(() => {
+  console.log("onMounted")
 
-      btn.value.addEventListener('click', () => {
-        console.log("btn clicked")
-      })
-    });
+  btn.value.addEventListener('click', () => {
+    console.log("btn clicked")
+  })
+});
 
-    const user = reactive({
-      name: "John",
-      age: 20,
-    });
+const user = reactive({
+  name: "John",
+  age: 20,
+});
 
-    setTimeout(() => {
-      user.name = "Luis";
-    }, 3000);
+setTimeout(() => {
+  user.name = "Luis";
+}, 3000);
 
-    const { num, increment, double } = useNumber();
-    const { phrase, reversedPhrase, num: phraseNum } = usePhrase();
+const { num, increment, double } = useNumber();
+const { phrase, reversedPhrase, num: phraseNum } = usePhrase();
 
-    return {
-      num,
-      increment,
-      ...toRefs(user),
-      phrase,
-      reversedPhrase,
-      double,
-      user,
-      btn,
-      phraseNum,
-    }
-  },
-};
+const { name } = toRefs(user);
 </script>
