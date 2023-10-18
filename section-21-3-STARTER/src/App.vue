@@ -10,6 +10,8 @@
       <input type="text" v-model="phrase"/>
     </p>
     <p>{{ reversedPhrase }}</p>
+
+    <app-alert :user="user" />
   </div>
 </template>
 
@@ -24,6 +26,7 @@ import {
   onBeforeMount,
   onMounted
 } from "vue";
+import AppAlert from "@/components/Alert.vue"
 // ref for Primitive Values / access though .value
 // reacitve for Objects / access directly
 // toRefs allows to make property reactive if we use spread operator
@@ -31,6 +34,9 @@ import {
 
 export default {
   name: "App",
+  components: {
+    AppAlert,
+  },
   setup() {
     onBeforeMount(() => {
       console.log("onBeforeMount")
@@ -79,6 +85,7 @@ export default {
       phrase,
       reversedPhrase,
       double,
+      user,
     }
   },
 };
