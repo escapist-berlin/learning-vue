@@ -22,13 +22,12 @@ import {
   ref,
   reactive,
   toRefs,
-  watchEffect,
-  watch,
-  computed,
   onBeforeMount,
   onMounted
 } from "vue";
-import AppAlert from "@/components/Alert.vue"
+import AppAlert from "@/components/Alert.vue";
+import { useNumber } from "@/hooks/number";
+import { usePhrase } from "@/hooks/phrase";
 // ref for Primitive Values / access though .value
 // reacitve for Objects / access directly
 // toRefs allows to make property reactive if we use spread operator
@@ -53,18 +52,6 @@ export default {
       })
     });
 
-    let num = ref(0);
-
-    // console.log(num);
-
-    function increment() {
-      num.value++;
-    }
-
-    const double = computed(() => {
-      return num.value * 2;
-    })
-
     const user = reactive({
       name: "John",
       age: 20,
@@ -74,17 +61,8 @@ export default {
       user.name = "Luis";
     }, 3000);
 
-    const phrase = ref("");
-    const reversedPhrase = ref("");
-
-    watchEffect(() => {
-      reversedPhrase.value = phrase.value.split("").reverse().join("");
-    });
-
-    // if we want specifiy what we want to watch
-    // watch([phrase], ([newVal, oldVal]) => {
-    //   reversedPhrase.value = phrase.value.split("").reverse().join("");
-    // });
+    const { num, increment, double } = useNumber();
+    const { phrase, reversedPhrase, num: phraseNum } = usePhrase();
 
     return {
       num,
@@ -95,6 +73,7 @@ export default {
       double,
       user,
       btn,
+      phraseNum,
     }
   },
 };
